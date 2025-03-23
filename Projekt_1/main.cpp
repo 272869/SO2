@@ -16,7 +16,7 @@ std::uniform_int_distribution<int> dist(1000, 5000);
 
 void report(int id, const std::string& state) {
     std::lock_guard<std::mutex> lock(print_protect);
-    std::cout << "Filozof " << id << " " << state << std::endl;
+    std::cout << "Philosopher " << id << " " << state << std::endl;
 }
 
 [[noreturn]] void philosopher(int id) {
@@ -26,23 +26,23 @@ void report(int id, const std::string& state) {
     while (true) {
         int thinking_time = dist(gen);
         std::this_thread::sleep_for(std::chrono::milliseconds(thinking_time));
-        report(id, "mysli");
+        report(id, "thinking...");
 
         forks[left_fork].lock();
-        report(id, "zabral lewy widelec");
+        report(id, "took the left fork");
 
         if (forks[right_fork].try_lock()) {
-            report(id, "zabral prawy widelec i zaczyna jesc");
+            report(id, "took the right fork and started eating");
 
             int eating_time = dist(gen);
             std::this_thread::sleep_for(std::chrono::milliseconds(eating_time));
             score[id]++;
-            report(id, "skonczyl jesc");
+            report(id, "finished eating");
 
             forks[right_fork].unlock();
             forks[left_fork].unlock();
         } else {
-            report(id, "nie mogl zabrac prawego widelca, zwraca lewy");
+            report(id, "couldn't take the right fork, returns the left one");
             forks[left_fork].unlock();
         }
     }
@@ -59,7 +59,7 @@ int main() {
     }
 
     for (int i = 0; i < N; i++) {
-        std::cout << "Filozof " << i << " jadl " << score[i] << " razy" << std::endl;
+        std::cout << "Philosopher " << i << " ate " << score[i] << " times" << std::endl;
     }
 
     return 0;
