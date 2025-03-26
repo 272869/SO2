@@ -1,0 +1,3 @@
+C:/Users/damian pelc/Desktop/Nowy folder/SO2/Projekt_1/.idea/cmake-build-debug/CMakeFiles/_idea.dir
+C:/Users/damian pelc/Desktop/Nowy folder/SO2/Projekt_1/.idea/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/damian pelc/Desktop/Nowy folder/SO2/Projekt_1/.idea/cmake-build-debug/CMakeFiles/rebuild_cache.dir
